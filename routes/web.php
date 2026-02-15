@@ -118,6 +118,9 @@ Route::middleware('auth')->group(function () {
   Route::get('/work-order-device/{id}/{device_id}', [WorkController::class, 'viewchecklist'])->name(
     'work-order-device'
   );
+  Route::get('/work-order-device-history/{id}/{device_id}', [WorkController::class, 'deviceHistory'])->name(
+    'work-order-device-history'
+  );
   Route::post('/work-order-checklist', [WorkController::class, 'updatechecklist'])->name('work-order-checklist');
   Route::post('/manage-work-orders/update', [WorkController::class, 'update'])->name('work-orders.update');
   Route::post('/manage-work-orders/sign', [WorkController::class, 'sign'])->name('work-orders.sign');

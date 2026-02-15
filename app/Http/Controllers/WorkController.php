@@ -325,6 +325,19 @@ class WorkController extends Controller
       compact('checklist', 'device', 'checklistTasks', 'work_order_id', 'device_id', 'work')
     );
   }
+  public function deviceHistory($work_order_id, $device_id)
+  {
+    $work = WorkOrder::findOrFail($work_order_id);
+    $device = Device::findOrFail($device_id);
+
+    $history = WorkOrder::whereHas('devices', function ($query) use ($device_id) {
+      $query->where('devices.id', $device_id);
+    })
+      ->orderBy('created_at', 'desc')
+      ->get();
+
+    return view('work-order-device-history', compact('work', 'device', 'history'));
+  }
   public function updatechecklist(Request $request)
   {
     $validated = $request->validate([

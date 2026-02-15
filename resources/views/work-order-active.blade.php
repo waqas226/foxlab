@@ -111,10 +111,7 @@ $customizerHidden = 'customizer-hide';
           <th>SN</th>
         <th>Make</th>
         <th>Model</th>
-          @if($work->status != 'Closed' || $work->type != 'Repair')
         <th>Action</th>
-      
-      @endif
       
         </tr>
       </thead>
@@ -133,13 +130,17 @@ $customizerHidden = 'customizer-hide';
               <td style="{{ $device->completed ? 'color:blue' : '' }}">{{ $device->sn }}</td>
                 <td  style="{{ $device->completed ? 'color:blue' : '' }}">{{ $device->make }}</td>
                 <td  style="{{ $device->completed ? 'color:blue' : '' }}">{{ $device->model }}</td>
-                  @if($work->status != 'Closed' || $work->type != 'Repair')
                 <td>
+                    @if($work->status != 'Closed' || $work->type != 'Repair')
                     <a href="{{ route('work-order-device', ['id' => $work->id, 'device_id' => $device->id]) }}" class="text-primary">
                         <i class="ti ti-list-check"></i> View
                     </a>
+                    <span class="mx-1 text-muted">|</span>
+                    @endif
+                    <a href="{{ route('work-order-device-history', ['id' => $work->id, 'device_id' => $device->id]) }}" class="text-info">
+                        <i class="ti ti-history"></i> View History
+                    </a>
                 </td>
-                @endif
                
               
              
