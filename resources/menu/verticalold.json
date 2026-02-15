@@ -1,0 +1,145 @@
+{
+    "menu": [
+        {
+            "name": "Dashboards",
+            "icon": "menu-icon tf-icons ti ti-smart-home",
+            "slug": "dashboard"
+        },
+        {
+            "menuHeader": "Tasks Management"
+        },
+        {
+            "url": "manage-tasks/create",
+            "name": "Add New Task",
+            "icon": "menu-icon tf-icons ti ti-layout-sidebar",
+            "slug": "manage-tasks-create"
+        },
+        {
+            "url": "manage-tasks",
+            "name": " Manage Open and Pending Tasks",
+            "icon": "menu-icon tf-icons ti ti-layout-sidebar",
+            "slug": "manage-tasks"
+        },
+        {
+            "menuHeader": "Todos"
+        },
+        {
+            "name": "Add Todos",
+            "icon": "menu-icon tf-icons ti ti-files",
+            "slug": "front-pages"
+        },
+        {
+            "name": "Manage Todos",
+            "icon": "menu-icon tf-icons ti ti-files",
+            "slug": "front-pages"
+        },
+        {
+            "menuHeader": "Users Management"
+        },
+        {
+            "url": "app/user/add",
+            "name": "Add Users",
+            "icon": "menu-icon tf-icons ti ti-user-plus",
+            "slug": "app-user-add"
+        },
+        {
+            "url": "app/user/list",
+            "name": "Manage Users",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "app-user-list"
+        },
+        {
+            "menuHeader": "Renewals"
+        },
+        {
+            "name": "Add Renewals",
+            "icon": "menu-icon tf-icons ti ti-user-plus",
+            "slug": "laravel-example"
+        },
+        {
+            "name": "Manage Renewals",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "laravel-example"
+        },
+        {
+            "menuHeader": "Companies Management"
+        },
+        {
+            "url": "manage-company",
+            "name": "Manage Companies",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "manage-company"
+        },
+        {
+            "menuHeader": "Notes"
+        },
+        {
+            "url": "manage-notes/create",
+            "name": "Add Notes",
+            "icon": "menu-icon tf-icons ti ti-file-plus",
+            "slug": "manage-notes-create"
+        },
+        {
+            "url": "manage-notes",
+            "name": "Manage Notes",
+            "icon": "menu-icon tf-icons ti ti-notes",
+            "slug": "manage-notes"
+        },
+        {
+            "menuHeader": "Site Constant Management"
+        },
+        {
+            "url": "manage-site-constants",
+            "name": "Manage Site Constant",
+            "icon": "menu-icon tf-icons ti ti-browser",
+            "slug": "manage-site-constants"
+        },
+        {
+            "name": "View Devices",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "laravel-example"
+        },
+        {
+            "name": "Download set up",
+            "icon": "menu-icon tf-icons ti ti-users",
+            "slug": "laravel-example"
+        },
+        {
+            "menuHeader": "Statistics Management"
+        },
+        {
+            "url": "view-statistics",
+            "name": "View Statistics",
+            "icon": "menu-icon tf-icons ti ti-chart-dots",
+            "slug": "view-statistics"
+        },
+        {
+            "menuHeader": "Tech Links"
+        },
+        {
+            "url": "manage-techlinks/create",
+            "name": "Add Tech Links",
+            "icon": "menu-icon tf-icons ti ti-cloud-plus",
+            "slug": "manage-techlinks-create"
+        },
+        {
+            "url": "manage-techlinks",
+            "name": "Manage Tech link",
+            "icon": "menu-icon tf-icons ti ti-cloud-code",
+            "slug": "manage-techlinks"
+        },
+        {
+            "menuHeader": "Account Management"
+        },
+        {
+            "name": "Change Password",
+            "icon": "menu-icon tf-icons ti ti-settings",
+            "slug": "app-access"
+        },
+        {
+            "name": "Logout",
+            "icon": "menu-icon tf-icons ti ti-login",
+            "slug": "pages"
+        }
+    ]
+}

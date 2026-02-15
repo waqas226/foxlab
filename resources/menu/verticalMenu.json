@@ -1,0 +1,55 @@
+{
+  "menu": [
+    {
+      "menuHeader": "Dashboard"
+    },
+    {
+      "name": " Manage Work Orders",
+      "icon": "menu-icon tf-icons ti ti-layout-sidebar",
+      "slug": "manage-work-orders",
+      "url": "manage-work-orders"
+    },
+    {
+      "url": "manage-customers",
+      "name": "Manage Customers",
+      "icon": "menu-icon tf-icons ti ti-users-group",
+      "slug": "manage-customers"
+    },
+    {
+      "name": "Manage Devices",
+      "icon": "menu-icon tf-icons ti ti-devices",
+      "slug": "manage-devices",
+      "url": "manage-devices"
+    },
+    {
+      "name": "Manage Checklists",
+      "icon": "menu-icon tf-icons ti ti-checklist",
+      "slug": "manage-checklists",
+      "url": "manage-checklists"
+    },
+    {
+      "url": "manage-users",
+      "name": "Manage Users",
+      "icon": "menu-icon tf-icons ti ti-users",
+      "slug": "manage-user"
+    },
+    {
+      "url": "manage-site-constants",
+      "name": "Manage Site Constant",
+      "icon": "menu-icon tf-icons ti ti-browser",
+      "slug": "manage-site-constants"
+    },
+    {
+      "name": "Change Password",
+      "icon": "menu-icon tf-icons ti ti-settings",
+      "slug": "change-password",
+      "url": "change-password"
+    },
+    {
+      "url": "logout",
+      "name": "Logout",
+      "icon": "menu-icon tf-icons ti ti-login",
+      "slug": "pages"
+    }
+  ]
+}

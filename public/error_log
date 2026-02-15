@@ -1,0 +1,72 @@
+[28-Jul-2025 12:59:45 America/Los_Angeles] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home1/dcklxite/dev.foxlablogistics.com/app/Http/Controllers/UserController.php:40) in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#2 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.0 500 In...', true, 500)
+#3 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#8 {main}
+  thrown in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php on line 322
+[03-Sep-2025 17:06:08 America/Los_Angeles] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home1/dcklxite/dev.foxlablogistics.com/app/Http/Controllers/UserController.php:40) in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#2 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.0 500 In...', true, 500)
+#3 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#8 {main}
+  thrown in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php on line 322
+[25-Nov-2025 13:47:20 America/Los_Angeles] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home1/dcklxite/dev.foxlablogistics.com/app/Http/Controllers/UserController.php:40) in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#2 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.0 500 In...', true, 500)
+#3 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#8 {main}
+  thrown in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php on line 322
+[28-Dec-2025 10:43:35 America/Los_Angeles] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home1/dcklxite/dev.foxlablogistics.com/app/Http/Controllers/UserController.php:40) in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#2 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.0 500 In...', true, 500)
+#3 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#8 {main}
+  thrown in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php on line 322
+[18-Jan-2026 11:17:02 America/Los_Angeles] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home1/dcklxite/dev.foxlablogistics.com/routes/web.php:41) in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#2 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.1 500 In...', true, 500)
+#3 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#8 {main}
+  thrown in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php on line 322
+[18-Jan-2026 12:08:09 America/Los_Angeles] PHP Fatal error:  Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home1/dcklxite/dev.foxlablogistics.com/app/Http/Controllers/UserController.php:40) in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php:322
+Stack trace:
+#0 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#1 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(2, 'Cannot modify h...', '/home1/dcklxite...', 322)
+#2 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(322): header('HTTP/1.0 500 In...', true, 500)
+#3 /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php(401): Symfony\Component\HttpFoundation\Response->sendHeaders()
+#4 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(219): Symfony\Component\HttpFoundation\Response->send()
+#5 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(196): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(ErrorException))
+#6 /home1/dcklxite/dev.foxlablogistics.com/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(256): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(ErrorException))
+#7 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(ErrorException))
+#8 {main}
+  thrown in /home1/dcklxite/dev.foxlablogistics.com/vendor/symfony/http-foundation/Response.php on line 322

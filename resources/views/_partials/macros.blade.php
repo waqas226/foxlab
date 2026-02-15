@@ -1,0 +1,1 @@
+<img src="{{ asset('uploads/'.$configData['siteVariable']->logo) }}" width="50">
