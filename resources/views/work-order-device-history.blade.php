@@ -41,7 +41,9 @@ if ($deviceDescription === '') {
             <tr>
               <td>{{ optional($workOrder->created_at)->format('Y-m-d') }}</td>
               <td>{{ $workOrder->type }}</td>
-              <td>{{ $workOrder->qb }}</td>
+              <td>
+              <a href="/manage-work-orders/{{$workOrder->id}}"  >
+              {{ $workOrder->qb }}</a></td>
               <td>{{ $workOrder->client_po ?: '-' }}</td>
             </tr>
             @empty
