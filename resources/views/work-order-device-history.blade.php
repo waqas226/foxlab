@@ -15,7 +15,7 @@ if ($deviceDescription === '') {
     <div class="card mb-3">
       <div class="card-header d-flex align-items-center">
         <p class="title-text text-uppercase text-body-secondary mb-0">Device History</p>
-        <a class="btn btn-secondary btn-sm ms-auto" href="{{ route('work-orders.view', ['id' => $work->id]) }}" type="button">Back</a>
+        <a class="btn btn-secondary btn-sm ms-auto" href="{{ $backUrl ?? route('manage-work-orders') }}" type="button">Back</a>
       </div>
       <div class="card-body">
         <h5 class="mb-0">{{ $device->sn }} - {{ $deviceDescription }}</h5>
@@ -39,7 +39,7 @@ if ($deviceDescription === '') {
           <tbody>
             @forelse($history as $workOrder)
             <tr>
-              <td>{{ optional($workOrder->created_at)->format('m/d/Y') }}</td>
+              <td>{{ optional($workOrder->created_at)->format('Y-m-d') }}</td>
               <td>{{ $workOrder->type }}</td>
               <td>{{ $workOrder->qb }}</td>
               <td>{{ $workOrder->client_po ?: '-' }}</td>

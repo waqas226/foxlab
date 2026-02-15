@@ -336,7 +336,23 @@ class WorkController extends Controller
       ->orderBy('created_at', 'desc')
       ->get();
 
-    return view('work-order-device-history', compact('work', 'device', 'history'));
+    $backUrl = route('work-orders.view', ['id' => $work->id]);
+
+    return view('work-order-device-history', compact('work', 'device', 'history', 'backUrl'));
+  }
+  public function deviceHistoryByDevice($device_id)
+  {
+    $device = Device::findOrFail($device_id);
+
+    $history = WorkOrder::whereHas('devices', function ($query) use ($device_id) {
+      $query->where('devices.id', $device_id);
+    })
+      ->orderBy('created_at', 'desc')
+      ->get();
+
+    $backUrl = route('manage-devices');
+
+    return view('work-order-device-history', compact('device', 'history', 'backUrl'));
   }
   public function updatechecklist(Request $request)
   {
