@@ -70,6 +70,7 @@ $customizerHidden = 'customizer-hide';
           <th>Company</th>
           <th >Address</th>
           <th>Devices</th>
+          <th>WO#</th>
           <th>Type</th>
           <th>Date Added</th>
           <th style="min-width: 100px;">Status</th>

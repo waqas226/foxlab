@@ -28,6 +28,7 @@ $(function () {
       { data: 'company' },
       { data: 'address' },
       { data: 'devices' },
+      { data: 'qb' },
       { data: 'type' },
       { data: 'date_added' },
       { data: 'status' },
@@ -79,7 +80,7 @@ $(function () {
       },
       {
         // User Status
-        targets: 5,
+        targets: 6,
         responsivePriority: 3,
         render: function (data, type, full, meta) {
           var $date = full['created_at'];
@@ -90,7 +91,7 @@ $(function () {
 
       {
         // User Status
-        targets: 6,
+        targets: 7,
         render: function (data, type, full, meta) {
           var $status = full['status'];
           // enum('Open', 'Closed', 'Archived', 'Pending'), select option for these statuses
@@ -162,7 +163,7 @@ $(function () {
         }
       }
     ],
-    order: [[5, 'desc']],
+    order: [[6, 'desc']],
     paging: false,
     dom:
       '<"row me-2"' +
@@ -193,7 +194,7 @@ $(function () {
             text: '<i class="ti ti-file-text me-2" ></i>Csv',
             className: 'dropdown-item',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6],
+              columns: [1, 2, 3, 4, 5, 6, 7],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {
@@ -217,7 +218,7 @@ $(function () {
             text: '<i class="ti ti-file-spreadsheet me-2"></i>Excel',
             className: 'dropdown-item',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6],
+              columns: [1, 2, 3, 4, 5, 6, 7],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {
@@ -242,7 +243,7 @@ $(function () {
             text: '<i class="ti ti-copy me-2" ></i>Copy',
             className: 'dropdown-item',
             exportOptions: {
-              columns: [1, 2, 3, 4, 5, 6],
+              columns: [1, 2, 3, 4, 5, 6, 7],
               // prevent avatar to be display
               format: {
                 body: function (inner, coldex, rowdex) {

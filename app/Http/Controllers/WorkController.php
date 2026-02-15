@@ -28,7 +28,7 @@ class WorkController extends Controller
   }
   public function show(Request $request)
   {
-    $columns = ['company', 'company', 'address', 'devices', 'type', 'created_at', 'status'];
+    $columns = ['company', 'company', 'address', 'devices', 'qb', 'type', 'created_at', 'status'];
 
     $query = WorkOrder::with('devices')->with('customer');
     $totalData = $query->count();
