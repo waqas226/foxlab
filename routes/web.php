@@ -35,7 +35,7 @@ Route::post('/two-factor-challenge', [CustomTwoFactorController::class, 'store']
 
 Route::get('/clear-cache', function () {
   Artisan::call('config:cache');
-//   Artisan::call('route:cache');
+  Artisan::call('route:cache');
   Artisan::call('view:cache');
   Artisan::call('cache:clear');
   echo now(); // Will print in LA timezone if config is set
