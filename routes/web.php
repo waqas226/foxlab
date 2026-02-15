@@ -38,6 +38,7 @@ Route::get('/clear-cache', function () {
   Artisan::call('route:cache');
   Artisan::call('view:cache');
   Artisan::call('cache:clear');
+  //WAQAS
   echo now(); // Will print in LA timezone if config is set
   return 'Cache cleared';
 })->name('clear-cache');
