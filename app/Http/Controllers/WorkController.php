@@ -325,6 +325,60 @@ class WorkController extends Controller
       compact('checklist', 'device', 'checklistTasks', 'work_order_id', 'device_id', 'work')
     );
   }
+  public function viewChecklistReadonly(Request $request, $work_order_id, $device_id = null)
+  {
+    $work = WorkOrder::findOrFail($work_order_id);
+    $device = Device::with('customer')->findOrFail($device_id);
+    $checklist = Checklist::find($device->checklist_id);
+
+    if ($work->type == 'Repair') {
+      $tasks = RepairTask::where('work_order_id', $work_order_id)
+        ->where('device_id', $device_id)
+        ->get();
+
+      $checklistTasks = $tasks->map(function ($task) {
+        return [
+          'id' => $task->id,
+          'title' => $task->title,
+          'description' => $task->description,
+          'quantity' => $task->quantity,
+          'notes' => $task->notes,
+          'completed' => $task->completed,
+        ];
+      });
+    } elseif (!$checklist) {
+      return redirect()
+        ->back()
+        ->with('error', 'Checklist not found');
+    } else {
+      $tasks = Task::with([
+        'workOrdersCompleted' => function ($query) use ($work_order_id, $device_id) {
+          $query->where('work_order_id', $work_order_id);
+          $query->where('device_id', $device_id);
+        },
+      ])
+        ->where('checklist_id', $checklist->id)
+        ->get();
+
+      $checklistTasks = $tasks->map(function ($task) {
+        $completed = $task->workOrdersCompleted->first();
+        return [
+          'id' => $task->id,
+          'title' => $task->title,
+          'checklist_id' => $task->checklist_id,
+          'completed' => (bool) optional($completed)->completed,
+          'notes' => optional($completed)->notes,
+        ];
+      });
+    }
+
+    $backUrl = $request->query('back', url()->previous());
+
+    return view(
+      'work-order-checklist-readonly',
+      compact('checklist', 'device', 'checklistTasks', 'work_order_id', 'device_id', 'work', 'backUrl')
+    );
+  }
   public function deviceHistory($work_order_id, $device_id)
   {
     $work = WorkOrder::findOrFail($work_order_id);

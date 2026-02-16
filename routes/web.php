@@ -118,6 +118,9 @@ Route::middleware('auth')->group(function () {
   Route::get('/work-order-device/{id}/{device_id}', [WorkController::class, 'viewchecklist'])->name(
     'work-order-device'
   );
+  Route::get('/work-order-device-view/{id}/{device_id}', [WorkController::class, 'viewChecklistReadonly'])->name(
+    'work-order-device-view'
+  );
   Route::get('/work-order-device-history/{id}/{device_id}', [WorkController::class, 'deviceHistory'])->name(
     'work-order-device-history'
   );

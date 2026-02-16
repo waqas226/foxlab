@@ -42,7 +42,7 @@ if ($deviceDescription === '') {
               <td>{{ optional($workOrder->created_at)->format('Y-m-d') }}</td>
               <td>{{ $workOrder->type }}</td>
               <td>
-              <a href="/manage-work-orders/{{$workOrder->id}}"  >
+              <a href="{{ route('work-order-device-view', ['id' => $workOrder->id, 'device_id' => $device->id, 'back' => request()->fullUrl()]) }}">
               {{ $workOrder->qb }}</a></td>
               <td>{{ $workOrder->client_po ?: '-' }}</td>
             </tr>
