@@ -19,3 +19,12 @@
 <!-- BEGIN: Page JS-->
 @yield('page-script')
 <!-- END: Page JS-->
+
+@if (session('hard_refresh'))
+<script>
+  window.addEventListener('load', function () {
+    // Force a reload after cache clear so latest assets/data are fetched.
+    window.location.reload(true);
+  });
+</script>
+@endif

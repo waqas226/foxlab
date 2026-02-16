@@ -17,6 +17,8 @@ use App\Http\Controllers\TwoFactorController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\OutlookAuthController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,16 +35,21 @@ use App\Http\Controllers\CustomerController;
 
 Route::post('/two-factor-challenge', [CustomTwoFactorController::class, 'store'])->name('two-factor.login');
 
-Route::get('/clear-cache', function () {
-  Artisan::call('config:cache');
-  Artisan::call('route:cache');
-  Artisan::call('view:cache');
-  Artisan::call('cache:clear');
-  //WAQAS
-  echo now(); // Will print in LA timezone if config is set
-  return 'Cache cleared';
-})->name('clear-cache');
 Route::middleware('auth')->group(function () {
+  Route::get('/clear-cache', function (Request $request) {
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+
+    $redirectUrl = url()->previous();
+    if (!$redirectUrl || $redirectUrl === url('/clear-cache')) {
+      $redirectUrl = route('manage-work-orders');
+    }
+
+    return redirect($redirectUrl)->with('hard_refresh', true);
+  })->name('clear-cache');
+
   Route::get('/manage-customers', [CustomerController::class, 'index'])->name('manage-customers');
   Route::get('/manage-customers/delete/{id}', [CustomerController::class, 'destroy'])->name('customers.delete');
   Route::get('/manage-customers/update-status/{id}', [CustomerController::class, 'status'])->name('customers.delete');

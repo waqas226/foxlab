@@ -46,6 +46,12 @@
       "url": "change-password"
     },
     {
+      "name": "Clear Cache",
+      "icon": "menu-icon tf-icons ti ti-refresh",
+      "slug": "clear-cache",
+      "url": "clear-cache"
+    },
+    {
       "url": "logout",
       "name": "Logout",
       "icon": "menu-icon tf-icons ti ti-login",
