@@ -30,6 +30,7 @@ class WorkOrderMail
       $accessToken = $this->getValidAccessToken($record);
     } catch (\Throwable $e) {
       Log::error('Outlook token refresh failed: ' . $e->getMessage());
+      $record->markOutlookDisconnected();
 
       return [
         'success' => false,
@@ -96,6 +97,10 @@ class WorkOrderMail
 
     if ($response->successful()) {
       return ['success' => true];
+    }
+
+    if ($this->shouldDisconnectOutlook($response->status(), $response->body())) {
+      $record->markOutlookDisconnected();
     }
 
     return [
@@ -205,5 +210,28 @@ class WorkOrderMail
     }
 
     return time() + 3600;
+  }
+
+  private function shouldDisconnectOutlook(int $status, string $body): bool
+  {
+    if (in_array($status, [401, 403], true)) {
+      return true;
+    }
+
+    $authErrors = [
+      'invalid_grant',
+      'invalid_token',
+      'token_expired',
+      'interaction_required',
+      'invalid_client',
+    ];
+
+    foreach ($authErrors as $needle) {
+      if (stripos($body, $needle) !== false) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

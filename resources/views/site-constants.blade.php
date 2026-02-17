@@ -134,7 +134,7 @@ $customizerHidden = 'customizer-hide';
                    <!-- outlook connect button -->
                    <div class="mb-3">
                   
-                     @if($constant->expires_in > now()->timestamp)
+                     @if($constant->isOutlookConnected())
                     <label for="outlook_connect" class="form-label">Outlook Connect</label>
                     <a href="#" class="btn btn-success ms-5">Connected</a>
                     @else

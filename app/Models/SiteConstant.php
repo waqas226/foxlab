@@ -30,4 +30,22 @@ class SiteConstant extends Model
   protected $casts = [
     'expires_in' => 'integer',
   ];
+
+  public function isOutlookConnected(): bool
+  {
+    if (empty($this->access_token) || empty($this->refresh_token) || empty($this->expires_in)) {
+      return false;
+    }
+
+    return (int) $this->expires_in > now()->timestamp;
+  }
+
+  public function markOutlookDisconnected(): void
+  {
+    $this->update([
+      'access_token' => null,
+      'refresh_token' => null,
+      'expires_in' => null,
+    ]);
+  }
 }
