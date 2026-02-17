@@ -26,4 +26,8 @@ class SiteConstant extends Model
     'expires_in',
     'email_template',
   ];
+
+  protected $casts = [
+    'expires_in' => 'integer',
+  ];
 }

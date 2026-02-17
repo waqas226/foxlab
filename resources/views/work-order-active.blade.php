@@ -138,7 +138,7 @@ $customizerHidden = 'customizer-hide';
                     <span class="mx-1 text-muted">|</span>
                     @endif
                     <a href="{{ route('work-order-device-history', ['id' => $work->id, 'device_id' => $device->id]) }}" class="text-info">
-                        <i class="ti ti-history"></i> View History
+                        <i class="ti ti-history"></i> History
                     </a>
                 </td>
                

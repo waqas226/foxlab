@@ -8,20 +8,27 @@ use App\Models\SiteConstant;
 
 class OutlookAuthController extends Controller
 {
-
-  public function redirectToProvider()
+  private function outlookProvider(): Azure
   {
-    $constant = SiteConstant::first();
+    $outlookConfig = config('services.outlook');
+
     $provider = new Azure([
-      'clientId' => 'e67a0188-1cc7-42f6-928e-495f1964e90d',
-      'clientSecret' => 'fSi8Q~UcqzkZyk2NCK71FlDZQ_uONYoZE1mfXcRJ',
-      'redirectUri' => 'https://dev.foxlablogistics.com/callback',
-      'tenant' => '04b9e953-510e-4e3f-bc0b-ca1cc5b52acb',
+      'clientId' => $outlookConfig['client_id'],
+      'clientSecret' => $outlookConfig['client_secret'],
+      'redirectUri' => $outlookConfig['redirect_uri'],
+      'tenant' => $outlookConfig['tenant_id'],
     ]);
 
     $provider->defaultEndPointVersion = Azure::ENDPOINT_VERSION_2_0;
+
+    return $provider;
+  }
+
+  public function redirectToProvider()
+  {
+    $provider = $this->outlookProvider();
     $authorizationUrl = $provider->getAuthorizationUrl([
-      'scope' => ['openid', 'profile', 'offline_access', 'Mail.Send'],
+      'scope' => config('services.outlook.scopes'),
     ]);
 
     session(['oauth2state' => $provider->getState()]);
@@ -31,15 +38,7 @@ class OutlookAuthController extends Controller
 
   public function handleProviderCallback(Request $request)
   {
-    $provider = new Azure([
-      'clientId' => 'e67a0188-1cc7-42f6-928e-495f1964e90d',
-      'clientSecret' => 'fSi8Q~UcqzkZyk2NCK71FlDZQ_uONYoZE1mfXcRJ',
-      'redirectUri' => 'https://dev.foxlablogistics.com/callback',
-      'tenant' => '04b9e953-510e-4e3f-bc0b-ca1cc5b52acb',
-    ]);
-
-    // ✅ Force Microsoft Identity Platform v2.0
-    $provider->defaultEndPointVersion = Azure::ENDPOINT_VERSION_2_0;
+    $provider = $this->outlookProvider();
 
     // ✅ CSRF protection: validate state
     if (empty($request->state) || $request->state !== session('oauth2state')) {
@@ -52,11 +51,16 @@ class OutlookAuthController extends Controller
         'code' => $request->code,
       ]);
 
-      // ✅ Save tokens to DB
-      $constant = SiteConstant::first();
+      $constant = SiteConstant::firstOrFail();
+      $refreshToken = $token->getRefreshToken();
+
+      if (empty($refreshToken)) {
+        throw new \RuntimeException('Missing refresh token from Microsoft. Ensure offline_access scope is granted.');
+      }
+
       $constant->update([
         'access_token' => $token->getToken(),
-        'refresh_token' => $token->getRefreshToken(),
+        'refresh_token' => $refreshToken,
         'expires_in' => $token->getExpires(), // Unix timestamp
       ]);
 
