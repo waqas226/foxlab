@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
 use App\Mail\WorkOrderMail;
 use Illuminate\Support\Facades\View;
+use Carbon\Carbon;
 
 class WorkController extends Controller
 {
@@ -460,10 +461,40 @@ class WorkController extends Controller
       'status' => 'required|in:Open,Closed,Pending,Archived',
     ]);
     $workOrder = WorkOrder::find($id);
+    $wasClosed =false;// $workOrder->status === 'Closed';
     $workOrder->status = $request->status;
     $workOrder->save();
+
+    if ($request->status === 'Closed' && !$wasClosed) {
+      $this->updateDevicePmDates($workOrder->id);
+    }
+
     return response()->json(['status' => true, 'message' => 'Work order status updated successfully']);
   }
+
+  private function updateDevicePmDates($workOrderId)
+  {
+    $workOrder = WorkOrder::with(['devices', 'customer'])->find($workOrderId);
+    if (!$workOrder || !$workOrder->customer) {
+      return;
+    }
+
+    $today = Carbon::today();
+    $pmType = (int) $workOrder->customer->pm_type;
+
+    foreach ($workOrder->devices as $device) {
+      $device->last_pm = $today->toDateString();
+
+      if ($pmType === 6) {
+        $device->next_pm = $today->copy()->addDays(180)->toDateString();
+      } elseif ($pmType === 12) {
+        $device->next_pm = $today->copy()->addYear()->toDateString();
+      }
+
+      $device->save();
+    }
+  }
+
   public function sign(Request $request)
   {
     $validated = $request->validate([
@@ -472,9 +503,14 @@ class WorkController extends Controller
     ]);
 
     $workOrder = WorkOrder::find($request->id);
+    $wasClosed =false;// $workOrder->status === 'Closed';
     $workOrder->signature = $request->signature;
     $workOrder->status = 'Closed';
     $workOrder->save();
+
+    if (!$wasClosed) {
+      $this->updateDevicePmDates($workOrder->id);
+    }
 
     return response()->json(['status' => true, 'message' => 'Signature saved successfully']);
   }

@@ -53,15 +53,16 @@ $navbarDetached = ($navbarDetached ?? '');
         <!-- /Search -->
         @endif
         
+        @if(config('app.env') === 'local' || config('app.env') === 'dev')
         <ul class="navbar-nav flex-row align-items-center mx-auto">
           <!-- Language -->
           <li class="nav-item me-2 me-xl-0">
-<a class="nav-item nav-link  d-flex align-items-center px-0" href="javascript:void(0);">
-          
-            <h2 class="text-primary fw-bold">Dev Site</h2>
+            <a class="nav-item nav-link d-flex align-items-center px-0" href="javascript:void(0);">
+              <h2 class="text-primary fw-bold">Dev Site</h2>
             </a>
-         </li> 
-         </ul>
+          </li> 
+        </ul>
+        @endif
         <ul class="navbar-nav flex-row align-items-center ms-auto">
           <!-- Language -->
          
