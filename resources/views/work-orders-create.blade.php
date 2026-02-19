@@ -13,6 +13,7 @@ $customizerHidden = 'customizer-hide';
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/@form-validation/umd/styles/index.min.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/animate-css/animate.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}" />
 
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.css')}}" />
 
@@ -29,6 +30,7 @@ $customizerHidden = 'customizer-hide';
 <script src="{{asset('assets/vendor/libs/cleavejs/cleave-phone.js')}}"></script>
 
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
+<script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/toastr/toastr.js')}}"></script>
 @endsection
 
@@ -125,7 +127,7 @@ $customizerHidden = 'customizer-hide';
           <div class="row">
             <div class="col-md-4">
               <label for="wo_date" class="form-label">Date</label>
-              <input type="date" class="form-control" id="wo_date" name="wo_date" value="{{ now()->format('Y-m-d') }}" required>
+              <input type="text" class="form-control flatpickr-validation" id="wo_date" name="wo_date" value="{{ now()->format('Y-m-d') }}" required>
             </div>
             <div class="col-md-4">
               <label for="qb" class="form-label">QB Work Order #</label>

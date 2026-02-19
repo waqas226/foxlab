@@ -8,9 +8,7 @@ class WorkOrder extends Model
 {
   protected $fillable = ['customer_id', 'qb', 'wo_date', 'client_po', 'type', 'notes'];
 
-  protected $casts = [
-    'wo_date' => 'date',
-  ];
+ 
 
   public function customer()
   {

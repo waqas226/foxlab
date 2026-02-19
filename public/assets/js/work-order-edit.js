@@ -5,6 +5,16 @@
 'use strict';
 
 $(function () {
+  const flatPickrList = [].slice.call(document.querySelectorAll('.flatpickr-validation'));
+  if (flatPickrList) {
+    flatPickrList.forEach(flatPickr => {
+      flatPickr.flatpickr({
+        monthSelectorType: 'static',
+        dateFormat: 'Y-m-d'
+      });
+    });
+  }
+
   // Update sort order numbers when rows are moved
   function updateSortOrders() {
     $('#devices-table tbody tr').each(function(index) {
