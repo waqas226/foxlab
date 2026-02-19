@@ -151,11 +151,15 @@ $customizerHidden = 'customizer-hide';
         </table>
         <div class="m-3">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <label for="wo_date" class="form-label">Date</label>
+              <input type="date" class="form-control" id="wo_date" name="wo_date" value="{{ $workOrder->wo_date ? \Carbon\Carbon::parse($workOrder->wo_date)->format('Y-m-d') : now()->format('Y-m-d') }}" required>
+            </div>
+            <div class="col-md-4">
               <label for="qb" class="form-label">QB Work Order #</label>
               <input type="text" class="form-control " id="qb" name="qb" placeholder="Enter QB Work Order #" required value="{{$workOrder->qb}}">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label for="client_po" class="form-label">Client PO #</label>
               <input type="text" class="form-control " id="client_po" name="client_po" placeholder="Enter Client PO #" value="{{$workOrder->client_po ?? ''}}">
             </div>

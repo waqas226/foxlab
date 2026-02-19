@@ -72,7 +72,7 @@ $customizerHidden = 'customizer-hide';
           <th>Devices</th>
           <th>WO#</th>
           <th>Type</th>
-          <th>Date Added</th>
+          <th>Date</th>
           <th style="min-width: 100px;">Status</th>
           <th>Actions</th>
         </tr>

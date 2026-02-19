@@ -75,6 +75,7 @@ $(function () {
   $('#create-work-order').on('click', function (e) {
     //get all values from the checkbox checked ,name="checkDevice[]"
     var qb = $('#qb').val();
+    var wo_date = $('#wo_date').val();
     var client_po = $('#client_po').val();
     var cid = $('#customer_id').val();
     var type = $('#type').val();
@@ -88,6 +89,12 @@ $(function () {
     if (!qb) {
       $('#qb').addClass('is-invalid');
       $('#qb').focus();
+
+      return;
+    }
+    if (!wo_date) {
+      $('#wo_date').addClass('is-invalid');
+      $('#wo_date').focus();
 
       return;
     }
@@ -167,6 +174,7 @@ $(function () {
               devices: selectedDevices,
               device_sort_orders: deviceSortOrders,
               qb: qb,
+              wo_date: wo_date,
               client_po: client_po,
               customer_id: cid,
               type: type,

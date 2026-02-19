@@ -29,7 +29,7 @@ class WorkController extends Controller
   }
   public function show(Request $request)
   {
-    $columns = ['company', 'company', 'address', 'devices', 'qb', 'type', 'created_at', 'status'];
+    $columns = ['company', 'company', 'address', 'devices', 'qb', 'type', 'wo_date', 'status'];
 
     $query = WorkOrder::with('devices')->with('customer');
     $totalData = $query->count();
@@ -46,7 +46,7 @@ class WorkController extends Controller
     if ($search) {
       $query->where(function ($q) use ($search) {
         $q->where('qb', 'like', "%{$search}%")
-          ->orWhere('created_at', 'like', "%{$search}%")
+          ->orWhere('wo_date', 'like', "%{$search}%")
           ->orWhereHas('customer', function ($q) use ($search) {
             $q->where('company', 'like', "%{$search}%")->orWhere('address', 'like', "%{$search}%");
           });
@@ -121,6 +121,7 @@ class WorkController extends Controller
     $validated = $request->validate([
       'customer_id' => 'required|exists:customers,id',
       'qb' => 'required|unique:work_orders,qb',
+      'wo_date' => 'required|date',
       'type' => 'required',
       'devices' => 'required|array',
       'devices.*' => 'exists:devices,id',
@@ -130,6 +131,7 @@ class WorkController extends Controller
     $workOrder = WorkOrder::create([
       'customer_id' => $validated['customer_id'],
       'qb' => $validated['qb'],
+      'wo_date' => $validated['wo_date'],
       'client_po' => $request->client_po ?? null,
       'type' => $validated['type'],
       'notes' => $request->notes ?? '',
@@ -156,12 +158,14 @@ class WorkController extends Controller
       'devices' => 'required|array',
       'devices.*' => 'exists:devices,id',
       'qb' => 'required|unique:work_orders,qb,' . $request->work_order_id,
+      'wo_date' => 'required|date',
       'type' => 'required',
       'notes' => 'nullable',
       'device_sort_orders' => 'nullable|array',
     ]);
     $workOrder = WorkOrder::find($request->work_order_id);
     $workOrder->qb = $request->qb;
+    $workOrder->wo_date = $request->wo_date;
     $workOrder->client_po = $request->client_po ?? null;
     $workOrder->type = $request->type;
     $workOrder->notes = $request->notes ?? '';

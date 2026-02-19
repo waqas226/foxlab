@@ -30,7 +30,7 @@ $(function () {
       { data: 'devices' },
       { data: 'qb' },
       { data: 'type' },
-      { data: 'date_added' },
+      { data: 'wo_date' },
       { data: 'status' },
       { data: 'action' }
     ],
@@ -83,9 +83,8 @@ $(function () {
         targets: 6,
         responsivePriority: 3,
         render: function (data, type, full, meta) {
-          var $date = full['created_at'];
-          // var $date = '11 Jan 2025 <br> 10:45:17 AM';
-          return moment($date).format('YYYY-MM-DD hh:mm:ss A');
+          var $date = full['wo_date'] || (full['created_at'] ? moment(full['created_at']).format('YYYY-MM-DD') : '');
+          return $date;
         }
       },
 
