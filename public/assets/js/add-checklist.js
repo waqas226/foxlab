@@ -180,7 +180,7 @@ $(function () {
     }
     addEmails++;
     var newEmail =
-      '<tr ><td class="taskid">' +
+      '<tr class="add_task_left"><td class="taskid">' +
       addEmails +
       '</td>' +
       '<td><div class="mb-3"><input type="text" class="form-control"  placeholder="Task Title" name="task_title[]" required  /></div>' +
@@ -195,8 +195,8 @@ $(function () {
     }
 
     // Update task IDs
-    $('#customEmails tr').each(function (index) {
-      $(this).find('.taskid').text(index);
+    $('#customEmails tr.add_task_left').each(function (index) {
+      $(this).find('.taskid').text(index + 1);
     });
   });
 })();

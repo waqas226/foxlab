@@ -25,6 +25,7 @@ class SiteConstant extends Model
     'refresh_token',
     'expires_in',
     'email_template',
+    'email_template_warning',
   ];
 
   protected $casts = [

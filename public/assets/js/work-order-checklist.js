@@ -22,6 +22,10 @@ $(function () {
     $('textarea[name="notes[]"]').each(function () {
       notes.push($(this).val());
     });
+    var warnings = [];
+    $('input.warning-checkbox').each(function () {
+      warnings.push($(this).is(':checked') ? 1 : 0);
+    });
     var description = [];
     $('textarea[name="description[]"]').each(function () {
       description.push($(this).val());
@@ -38,6 +42,7 @@ $(function () {
         tasks: tasks,
         completed: completed,
         notes: notes,
+        warnings: warnings,
         description: description,
         quantity: quantity,
         work_order_id: work_order_id,

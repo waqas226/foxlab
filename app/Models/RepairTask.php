@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RepairTask extends Model
 {
   protected $table = 'repair_tasks';
-  protected $fillable = ['work_order_id', 'device_id', 'title', 'description', 'quantity', 'notes'];
+  protected $fillable = ['work_order_id', 'device_id', 'title', 'description', 'quantity', 'notes', 'warning'];
 
   public function workOrder()
   {

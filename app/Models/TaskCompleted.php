@@ -7,7 +7,7 @@ class TaskCompleted extends Model
 {
   protected $table = 'task_completed';
 
-  protected $fillable = ['work_order_id', 'task_id', 'notes', 'completed', 'device_id'];
+  protected $fillable = ['work_order_id', 'task_id', 'notes', 'completed', 'warning', 'device_id'];
 
   public function workOrder()
   {

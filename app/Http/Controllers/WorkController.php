@@ -295,6 +295,7 @@ class WorkController extends Controller
           'description' => $task->description,
           'quantity' => $task->quantity,
           'notes' => $task->notes,
+          'warning' => (bool) $task->warning,
           'completed' => $task->completed,
         ];
       });
@@ -319,6 +320,7 @@ class WorkController extends Controller
           'title' => $task->title,
           'checklist_id' => $task->checklist_id,
           'completed' => (bool) optional($completed)->completed,
+          'warning' => (bool) optional($completed)->warning,
           'notes' => optional($completed)->notes,
         ];
       });
@@ -348,6 +350,7 @@ class WorkController extends Controller
           'description' => $task->description,
           'quantity' => $task->quantity,
           'notes' => $task->notes,
+          'warning' => (bool) $task->warning,
           'completed' => $task->completed,
         ];
       });
@@ -372,6 +375,7 @@ class WorkController extends Controller
           'title' => $task->title,
           'checklist_id' => $task->checklist_id,
           'completed' => (bool) optional($completed)->completed,
+          'warning' => (bool) optional($completed)->warning,
           'notes' => optional($completed)->notes,
         ];
       });
@@ -419,6 +423,7 @@ class WorkController extends Controller
       'tasks' => 'required|array',
       'completed' => 'required|array',
       'notes' => 'required|array',
+      'warnings' => 'nullable|array',
     ]);
 
     $workOrder = WorkOrder::find($request->work_order_id);
@@ -428,21 +433,53 @@ class WorkController extends Controller
       $tasks = RepairTask::where('work_order_id', $request->work_order_id)
         ->where('device_id', $device->id)
         ->get();
+      $warnings = $request->warnings ?? [];
+      $warningNotifications = [];
 
       foreach ($tasks as $key => $task) {
+        $newNote = $request->notes[$key] ?? '';
+        $warningEnabled = (int) ($warnings[$key] ?? 0) === 1;
+        $wasWarningEnabled = (int) $task->warning === 1;
+        $oldNote = trim((string) $task->notes);
+        $newNoteTrimmed = trim((string) $newNote);
+        $isNewlyTriggered = !$wasWarningEnabled || $oldNote !== $newNoteTrimmed;
+
         $task->completed = $request->completed[$key] ?? 0;
-        $task->notes = $request->notes[$key] ?? '';
+        $task->notes = $newNote;
+        $task->warning = $warningEnabled ? 1 : 0;
         $task->description = $request->description[$key] ?? '';
         $task->quantity = $request->quantity[$key] ?? '';
         $task->save();
+
+        if ($warningEnabled && $newNoteTrimmed !== '' && $isNewlyTriggered) {
+          $warningNotifications[] = [
+            'task_title' => $task->title,
+            'task_note' => $newNoteTrimmed,
+          ];
+        }
+      }
+
+      if (!empty($warningNotifications)) {
+        $this->sendChecklistWarningMails($workOrder, $device, $warningNotifications);
       }
     } else {
       $checklist = Checklist::find($device->checklist_id);
       $tasks = $request->tasks;
       $completed = $request->completed;
       $notes = $request->notes;
+      $warnings = $request->warnings ?? [];
+      $warningNotifications = [];
 
       foreach ($tasks as $key => $task) {
+        $existingTaskCompleted = TaskCompleted::where('work_order_id', $request->work_order_id)
+          ->where('task_id', $task)
+          ->where('device_id', $request->device_id)
+          ->first();
+
+        $newNote = $notes[$key] ?? '';
+        $newCompleted = (int) ($completed[$key] ?? 0);
+        $warningEnabled = (int) ($warnings[$key] ?? 0) === 1;
+
         TaskCompleted::updateOrCreate(
           [
             'work_order_id' => $request->work_order_id,
@@ -450,13 +487,89 @@ class WorkController extends Controller
             'device_id' => $request->device_id,
           ],
           [
-            'notes' => $notes[$key],
-            'completed' => $completed[$key] ?? 0,
+            'notes' => $newNote,
+            'completed' => $newCompleted,
+            'warning' => $warningEnabled ? 1 : 0,
           ]
         );
+
+        $wasWarningEnabled = (int) optional($existingTaskCompleted)->warning === 1;
+        $oldNote = trim((string) optional($existingTaskCompleted)->notes);
+        $newNoteTrimmed = trim((string) $newNote);
+        $isNewlyTriggered = !$wasWarningEnabled || $oldNote !== $newNoteTrimmed;
+
+        if ($warningEnabled && $newNoteTrimmed !== '' && $isNewlyTriggered) {
+          $taskRecord = Task::find($task);
+          if ($taskRecord) {
+            $warningNotifications[] = [
+              'task_title' => $taskRecord->title,
+              'task_note' => $newNoteTrimmed,
+            ];
+          }
+        }
+      }
+
+      if (!empty($warningNotifications)) {
+        $this->sendChecklistWarningMails($workOrder, $device, $warningNotifications);
       }
     }
     return response()->json(['status' => true, 'message' => 'Checklist updated successfully']);
+  }
+
+  private function sendChecklistWarningMails(WorkOrder $workOrder, Device $device, array $warningNotifications): void
+  {
+    $customer = Customer::find($workOrder->customer_id);
+    if (!$customer) {
+      return;
+    }
+
+    $to = $customer->primary_email ?: $customer->secondary_email;
+    if (empty($to)) {
+      return;
+    }
+
+    $mailService = app(WorkOrderMail::class);
+    $constant = SiteConstant::first();
+    $template = $this->resolveWarningTemplate($constant);
+    $workDate = $workOrder->wo_date ?: optional($workOrder->created_at)->format('m/d/Y');
+
+    foreach ($warningNotifications as $warning) {
+      $message = str_replace('{{user_name}}', $customer->primary_contact ?: 'Customer', $template);
+      $message = str_replace('{{company_name}}', $customer->company ?? '', $message);
+      $message = str_replace('{{company_address}}', $customer->address ?? '', $message);
+      $message = str_replace('{{work_order_id}}', $workOrder->qb ?? '', $message);
+      $message = str_replace('{{work_order_type}}', $workOrder->type ?? '', $message);
+      $message = str_replace('{{work_order_date}}', $workDate ?? '', $message);
+      $message = str_replace('{{device_make}}', $device->make ?? '', $message);
+      $message = str_replace('{{device_model}}', $device->model ?? '', $message);
+      $message = str_replace('{{device_sn}}', $device->sn ?? '', $message);
+      $message = str_replace('{{device_asset}}', $device->asset ?? '', $message);
+      $message = str_replace('{{task_title}}', $warning['task_title'] ?? '', $message);
+      $message = str_replace('{{task_note}}', $warning['task_note'] ?? '', $message);
+
+      $mailService->sendMail(
+        'waqasashrafg@gmail.com',
+        ['waqas.jat226@gmail.com'],
+        'Checklist Warning WO#: ' . $workOrder->qb,
+        $message
+      );
+    }
+  }
+
+  private function resolveWarningTemplate(?SiteConstant $constant): string
+  {
+    if ($constant && !empty($constant->email_template_warning)) {
+      return $constant->email_template_warning;
+    }
+
+    return '<p>Hello {{user_name}},</p>
+<p>A checklist warning was triggered for work order <strong>{{work_order_id}}</strong>.</p>
+<p><strong>Company:</strong> {{company_name}}<br>
+<strong>Address:</strong> {{company_address}}</p>
+<p><strong>Device:</strong> {{device_make}} {{device_model}} (SN: {{device_sn}}, Asset: {{device_asset}})</p>
+<p><strong>Checklist Item:</strong> {{task_title}}<br>
+<strong>Note:</strong> {{task_note}}</p>
+<p>Please review and contact us if needed.</p>';
   }
 
   public function updatestatus(Request $request, $id)

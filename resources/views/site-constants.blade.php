@@ -131,6 +131,14 @@ $customizerHidden = 'customizer-hide';
                         <label for="email_template" class="form-label">Email Template </label>
                         <div class="form-control" name="email_template" id="email_template" rows="4"><?= $constant->email_template ?></div>
                     </div>
+                    <div class="mb-3">
+                        <label for="email_template_warning" class="form-label">Checklist Warning Email Template</label>
+                        <div class="form-control" name="email_template_warning" id="email_template_warning" rows="4"><?= $constant->email_template_warning ?></div>
+                        <small class="text-muted d-block mt-2">
+                          Supported variables:
+                          {{'{user_name}'}}, {{'{company_name}'}}, {{'{company_address}'}}, {{'{work_order_id}'}}, {{'{work_order_type}'}}, {{'{work_order_date}'}}, {{'{device_make}'}}, {{'{device_model}'}}, {{'{device_sn}'}}, {{'{device_asset}'}}, {{'{task_title}'}}, {{'{task_note}'}}
+                        </small>
+                    </div>
                    <!-- outlook connect button -->
                    <div class="mb-3">
                   

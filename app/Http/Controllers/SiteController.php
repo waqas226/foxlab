@@ -43,7 +43,8 @@ class SiteController extends Controller
     $constant->contact_mobile = $request->contact_mobile;
     $constant->contact_office = $request->contact_office;
     $constant->company_name = $request->company_name;
-     $constant->email_template = $request->email_template;
+    $constant->email_template = $request->email_template;
+    $constant->email_template_warning = $request->email_template_warning;
     $constant->save();
 
     return response()->json(['status' => true, 'message' => 'Site constants updated successfully.']);

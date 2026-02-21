@@ -87,6 +87,7 @@ $customizerHidden = 'customizer-hide';
             <th>Description / Part Number</th>
             <th>Quantity</th>
             <th>Notes</th>
+            <th>Warning</th>
             <th>
               <input type="checkbox" id="selectAllCompletedRepair" class="form-check-input">
               <label for="selectAllCompletedRepair" class="ms-2">Completed</label>
@@ -109,6 +110,9 @@ $customizerHidden = 'customizer-hide';
                     <textarea name="notes[]" id="labor_notes" class="form-control" placeholder="Enter Notes">{{$checklist['notes']}}</textarea>
                     
                   </td>
+                <td>
+                  <input type="checkbox" name="warning[]" class="form-check-input warning-checkbox" @if(!empty($checklist['warning'])) checked @endif>
+                </td>
                 <td>
                   <input type="checkbox" name="completed[]" class="form-check-input completed-checkbox-repair" @if($checklist['completed']) checked @endif>
                 </td>
@@ -141,6 +145,7 @@ $customizerHidden = 'customizer-hide';
           <th>Step</th>
         <th>Task</th>
         <th>Comment First</th>
+        <th>Warning</th>
         <th>
           <input type="checkbox" id="selectAllCompleted" class="form-check-input" 
           @if($work->status == 'Closed') disabled @endif>
@@ -165,6 +170,11 @@ $customizerHidden = 'customizer-hide';
                 <textarea name="notes[]" id="notes" class="form-control" placeholder="Enter Comment">{{$checklist['notes'] ?? ''}}</textarea>
                 @endif
               </td>
+             <td>
+                <input type="checkbox" name="warning[]" class="form-check-input warning-checkbox" @if(!empty($checklist['warning'])) checked @endif
+                @if($work->status == 'Closed') disabled @endif
+                >
+             </td>
              <td>
                 <input type="checkbox" name="completed[]" class="form-check-input completed-checkbox" @if($checklist['completed']) checked @endif 
                 @if($work->status == 'Closed') disabled @endif

@@ -64,11 +64,21 @@ $(function () {
     },
     theme: 'snow'
   });
+  const warningEditor = new Quill('#email_template_warning', {
+    bounds: '#email_template_warning',
+    placeholder: 'Type Something...',
+    modules: {
+      formula: true,
+      toolbar: fullToolbar
+    },
+    theme: 'snow'
+  });
 
   $('#siteConstantForm').on('submit', function (e) {
     e.preventDefault(); // Prevent default form submission
     var formData = new FormData(this);
     formData.append('email_template', fullEditor.root.innerHTML);
+    formData.append('email_template_warning', warningEditor.root.innerHTML);
 
     $.ajax({
       url: '/manage-site-constants',
