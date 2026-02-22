@@ -132,6 +132,11 @@ $customizerHidden = 'customizer-hide';
                         <div class="form-control" name="email_template" id="email_template" rows="4"><?= $constant->email_template ?></div>
                     </div>
                     <div class="mb-3">
+                        <label for="manager_mail" class="form-label">Manager Email</label>
+                        <input class="form-control" name="manager_mail" id="manager_mail" value="{{$constant->manager_mail ?? ''}}"
+                            placeholder="manager@example.com" type="email">
+                    </div>
+                    <div class="mb-3">
                         <label for="email_template_warning" class="form-label">Checklist Warning Email Template</label>
                         <div class="form-control" name="email_template_warning" id="email_template_warning" rows="4"><?= $constant->email_template_warning ?></div>
                         <small class="text-muted d-block mt-2">

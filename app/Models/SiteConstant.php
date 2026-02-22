@@ -25,6 +25,7 @@ class SiteConstant extends Model
     'refresh_token',
     'expires_in',
     'email_template',
+    'manager_mail',
     'email_template_warning',
   ];
 

@@ -18,6 +18,7 @@ class SiteController extends Controller
     $request->validate([
       'site_name' => 'required',
       'idle_timeout' => 'required',
+      'manager_mail' => 'nullable|email',
     ]);
 
     $constant = SiteConstant::first();
@@ -44,6 +45,7 @@ class SiteController extends Controller
     $constant->contact_office = $request->contact_office;
     $constant->company_name = $request->company_name;
     $constant->email_template = $request->email_template;
+    $constant->manager_mail = $request->manager_mail;
     $constant->email_template_warning = $request->email_template_warning;
     $constant->save();
 

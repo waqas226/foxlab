@@ -523,13 +523,14 @@ class WorkController extends Controller
       return;
     }
 
-    $to = $customer->primary_email ?: $customer->secondary_email;
+    $constant = SiteConstant::first();
+    $to = trim((string) ($constant->manager_mail ?? ''));
+   
     if (empty($to)) {
       return;
     }
 
     $mailService = app(WorkOrderMail::class);
-    $constant = SiteConstant::first();
     $template = $this->resolveWarningTemplate($constant);
     $workDate = $workOrder->wo_date ?: optional($workOrder->created_at)->format('m/d/Y');
 
@@ -548,8 +549,8 @@ class WorkController extends Controller
       $message = str_replace('{{task_note}}', $warning['task_note'] ?? '', $message);
 
       $mailService->sendMail(
-        'waqasashrafg@gmail.com',
-        ['waqas.jat226@gmail.com'],
+       $to,
+        [],
         'Checklist Warning WO#: ' . $workOrder->qb,
         $message
       );
