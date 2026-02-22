@@ -651,6 +651,7 @@ class WorkController extends Controller
             'description' => $task->description,
             'quantity' => $task->quantity,
             'notes' => $task->notes,
+            'warning' => (bool) $task->warning,
             'completed' => $task->completed,
           ];
         });
@@ -710,6 +711,7 @@ class WorkController extends Controller
             'description' => $task->description,
             'quantity' => $task->quantity,
             'notes' => $task->notes,
+            'warning' => (bool) $task->warning,
             'completed' => $task->completed,
           ];
         });

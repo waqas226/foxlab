@@ -83,6 +83,15 @@
 									padding: 8px;
 									text-align: left;
 															  }
+  .warning-row td {
+    color: #b91c1c;
+    font-weight: 700;
+    background: #fee2e2;
+  }
+  .warning-text {
+    color: #b91c1c;
+    font-weight: 700;
+  }
 
     </style> 
 <!-- work order drtails -->
@@ -263,11 +272,16 @@ CFO
     </thead>
     <tbody>
      @foreach($device->checklistTasks as $checklist)
-        <tr>
+        <tr class="@if(!empty($checklist['warning'])) warning-row @endif">
           <td>{{ $checklist['title'] }}</td>
           <td>{{ $checklist['description'] }}</td>
           <td>{{ $checklist['quantity'] }}</td>
-          <td>{{ $checklist['notes'] }}</td>
+          <td>
+            {{ $checklist['notes'] }}
+            @if(!empty($checklist['warning']))
+              <span class="warning-text"> (WARNING)</span>
+            @endif
+          </td>
           <td>@if($checklist['completed'])
           <i class="fa fa-check text-success"></i>
       
@@ -292,7 +306,7 @@ CFO
         @if($device->checklist)
         <?php $c = 1; ?>
       @foreach($device->checklist->tasks as $task)
-        <tr>
+        <tr class="@if($task->workOrdersCompleted && $task->workOrdersCompleted->warning) warning-row @endif">
             
           <td>{{ $c++ }}</td>
           <td>{{ $task->title }}</td>
@@ -301,7 +315,12 @@ CFO
       
         @endif
         </td>
-            <td>{{ ($task->workOrdersCompleted && $task->workOrdersCompleted->completed) ? $task->workOrdersCompleted->notes : '' }}</td>
+            <td>
+              {{ ($task->workOrdersCompleted && $task->workOrdersCompleted->completed) ? $task->workOrdersCompleted->notes : '' }}
+              @if($task->workOrdersCompleted && $task->workOrdersCompleted->warning)
+                <span class="warning-text"> (WARNING)</span>
+              @endif
+            </td>
          
         </tr>
       @endforeach

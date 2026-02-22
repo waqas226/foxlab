@@ -15,6 +15,11 @@ $customizerHidden = 'customizer-hide';
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.css')}}" />
+<style>
+  .warning-checkbox:checked {
+    accent-color: #dc2626;
+  }
+</style>
 
 @endsection
 

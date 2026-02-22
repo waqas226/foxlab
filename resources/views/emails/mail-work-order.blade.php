@@ -37,6 +37,15 @@
         .page-break {
             page-break-after: always;
         }
+        .warning-row td {
+            color: #b91c1c;
+            font-weight: 700;
+            background: #fee2e2;
+        }
+        .warning-text {
+            color: #b91c1c;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -160,11 +169,16 @@
                     </thead>
                     <tbody>
                         @foreach($device->checklistTasks as $checklist)
-                            <tr>
+                            <tr class="@if(!empty($checklist['warning'])) warning-row @endif">
                                 <td><b>{{ $checklist['title'] }}</b></td>
                                 <td>{{ $checklist['description'] }}</td>
                                 <td>{{ $checklist['quantity'] }}</td>
-                                <td>{{ $checklist['notes'] }}</td>
+                                <td>
+                                  {{ $checklist['notes'] }}
+                                  @if(!empty($checklist['warning']))
+                                    <span class="warning-text"> (WARNING)</span>
+                                  @endif
+                                </td>
                                 <td>@if($checklist['completed'])
                                     <span style="color: green; font-weight: bold;">&#10003;</span>
                                 @endif</td>
@@ -184,13 +198,18 @@
                         @if($device->checklist)
                             <?php $c = 1; ?>
                             @foreach($device->checklist->tasks as $task)
-                                <tr>
+                                <tr class="@if($task->workOrdersCompleted && $task->workOrdersCompleted->warning) warning-row @endif">
                                     <td>{{ $c++ }}</td>
                                     <td>{{ $task->title }}</td>
                                     <td>@if($task->workOrdersCompleted && $task->workOrdersCompleted->completed)
                                         <span style="color: green; font-weight: bold;">&#10003;</span>
                                     @endif</td>
-                                    <td>{{ ($task->workOrdersCompleted && $task->workOrdersCompleted->completed) ? $task->workOrdersCompleted->notes : '' }}</td>
+                                    <td>
+                                      {{ ($task->workOrdersCompleted && $task->workOrdersCompleted->completed) ? $task->workOrdersCompleted->notes : '' }}
+                                      @if($task->workOrdersCompleted && $task->workOrdersCompleted->warning)
+                                        <span class="warning-text"> (WARNING)</span>
+                                      @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif
