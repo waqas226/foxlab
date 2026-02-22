@@ -12,7 +12,7 @@ $configData = Helper::appClasses();
         @include('_partials.macros',["height"=>20])
         
       </span>
-      <span class="app-brand-text demo menu-text fw-bold">Dev Fox Lab<br> Logistics</span>
+      <span class="app-brand-text demo menu-text fw-bold"> @if(config('app.env') === 'local' || config('app.env') === 'dev')Dev @endif Fox Lab<br> Logistics</span>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
